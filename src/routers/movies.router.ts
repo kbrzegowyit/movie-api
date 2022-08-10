@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { MovieController } from "../api/movies/movies.controller";
-import { Movie, MovieType } from "../api/movies/movies.model";
-import { MovieService } from "../api/movies/movies.service";
-import { UpdateMovie } from "../api/movies/type";
+import { Movie } from "../api/movies/movies.model";
+import { controllerHandler } from "../middleware/controllerHandler";
 import { ID, ROOT } from "./route.constants";
 
 export class MoviesRouter {
@@ -20,10 +19,13 @@ export class MoviesRouter {
             res.send(result);
         });
 
-        movieRouter.get(ROOT, async (_, res) => {
-            const result = await movieController.getAllMovies();
-            res.send(result);
-        });
+        // movieRouter.get(ROOT, (req, res, next) => { res.locals = {}; }, async (_, res) => {
+        //     const result = await movieController.getAllMovies();
+        //     throw new CustomError(500, 'Taki errorek;', '');
+        //     res.send(result);
+        // });
+
+        movieRouter.get(ROOT, controllerHandler(movieController.getAllMovies));
 
         movieRouter.get(ID, async (req, res) => {
             const result = await movieController.getMovieById(req.params.id as unknown as number);

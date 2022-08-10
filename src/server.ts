@@ -1,11 +1,13 @@
 import 'reflect-metadata'
-import express from 'express'
+import express, {  } from 'express'
 import dotenv from 'dotenv'
 import { DataSource } from 'typeorm'
 import { Movie } from './api/movies/movies.model';
 import { MainRouter } from './routers/main.router';
 import { ServicesFactory } from './services.factory';
 import { ControllersFactory } from './controllers.factory';
+import { errorHandler } from './middleware/errorHandler';
+import { responseHandler } from './middleware/responseHandler';
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
@@ -33,6 +35,8 @@ const mainRouter = new MainRouter(controllersFactory);
 
 server.use(express.json());
 server.use('/', mainRouter.router);
+server.use(errorHandler);
+server.use(responseHandler);
 
 server.listen(process.env.SERVER_PORT, () => 
     console.log(`Server is listening on port ${process.env.SERVER_PORT}...`)

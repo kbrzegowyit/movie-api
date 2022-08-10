@@ -7,18 +7,27 @@ export class MovieRepository extends Repository<Movie> {
         super(Movie, dataSource.createEntityManager()) 
     }
 
-    public addMovie = async (movie: Movie) => this.save(movie);
+    public addMovie = async (movie: Movie) => {
+        return this.save(movie);
+    }
 
-    public getAllMovies = async () => this.find({ order: { name: "DESC" }});
+    public getAllMovies = async () => {
+        return this.find({ order: { name: "DESC" }});
+    }
 
-    public getMovieById = async (id: number) => this.find({ where: { id: id }});
+    public getMovieById = async (id: number) => {
+        return this.find({ where: { id: id }});
+    }
 
-    public updateMovieById = async (id: number, data: UpdateMovie) => 
-    this.createQueryBuilder()
-        .update({ ...data })
-        .where({ id })
-        .returning('*')
-        .execute();
+    public updateMovieById = async (id: number, data: UpdateMovie) => {
+        return this.createQueryBuilder()
+            .update({ ...data })
+            .where({ id })
+            .returning('*')
+            .execute();
+    } 
 
-    public deleteMovieById = async (id: number) => this.delete(id);
+    public deleteMovieById = async (id: number) => {
+        return this.delete(id);
+    }
 }
