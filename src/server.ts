@@ -7,7 +7,7 @@ import { MainRouter } from './routers/main.router';
 import { ServicesFactory } from './services.factory';
 import { ControllersFactory } from './controllers.factory';
 
-dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 export const AppDataSource = new DataSource({
     type: "postgres",
