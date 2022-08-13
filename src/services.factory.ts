@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
-import { MovieRepository } from "./api/movies/movies.repository";
-import { MovieService } from "./api/movies/movies.service"
+import { MovieRepository } from "./api/movies/movie.repository";
+import { MovieService } from "./api/movies/movie.service"
 
 export interface Services {
     movieService: MovieService

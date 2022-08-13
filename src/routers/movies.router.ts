@@ -1,7 +1,9 @@
 import { Router } from "express";
-import { MovieController } from "../api/movies/movies.controller";
-import { Movie } from "../api/movies/movies.model";
+import { MovieController } from "../api/movies/movie.controller";
+import { HttpStatusCode } from "../errors/types";
 import { controllerHandler } from "../middleware/controllerHandler";
+import { requestValidator } from "../middleware/requestValidator";
+import { SCHEMAS } from "../schemas/types";
 import { ID, ROOT } from "./route.constants";
 
 export class MoviesRouter {
@@ -10,42 +12,31 @@ export class MoviesRouter {
     constructor(private movieController: MovieController) {
         const movieRouter = Router();
 
-        movieRouter.post(ROOT, async (req, res) => {
-            const movie = new Movie();
-            movie.name = req.body.name;
-            movie.type = req.body.type;
-            
-            const result = await movieController.addMovie(movie);
-            res.send(result);
-        });
-
-        // movieRouter.get(ROOT, (req, res, next) => { res.locals = {}; }, async (_, res) => {
-        //     const result = await movieController.getAllMovies();
-        //     throw new CustomError(500, 'Taki errorek;', '');
-        //     res.send(result);
-        // });
+        movieRouter.post(
+            ROOT, 
+            requestValidator({ body: SCHEMAS.BODY.MOVIE_ADD_SCHEMA }), 
+            controllerHandler(movieController.addMovie, HttpStatusCode.CREATED)
+        );
 
         movieRouter.get(ROOT, controllerHandler(movieController.getAllMovies));
 
-        movieRouter.get(ID, async (req, res) => {
-            const result = await movieController.getMovieById(req.params.id as unknown as number);
-            res.send(result);
-        });
+        movieRouter.get(
+            ID, 
+            requestValidator({ params: SCHEMAS.PARAMS.PARAM_ID }), 
+            controllerHandler(movieController.getMovieById)
+        );
 
-        movieRouter.patch(ID, async (req, res) => {
-            const id = req.params.id as unknown as number;
-            const data = req.body;
-            
-            const result = await movieController.updateMovieById(id, data);
-            res.send(result);
-        });
+        movieRouter.patch(
+            ID, 
+            requestValidator({ params: SCHEMAS.PARAMS.PARAM_ID, body: SCHEMAS.BODY.MOVIE_UPDATE_SCHEMA }), 
+            controllerHandler(movieController.updateMovieById)
+        );
 
-        movieRouter.delete(ID, async (req, res) => {
-            const id = req.params.id as unknown as number;
-            
-            const result = await movieController.deleteMovieById(id);
-            res.send(result);
-        });
+        movieRouter.delete(
+            ID, 
+            requestValidator({ params: SCHEMAS.PARAMS.PARAM_ID }), 
+            controllerHandler(movieController.deleteMovieById, HttpStatusCode.NO_CONTENT)
+        );
 
         this.router = movieRouter;
     }

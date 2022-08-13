@@ -8,14 +8,14 @@ export enum MovieType {
 @Entity()
 export class Movie {
     @PrimaryGeneratedColumn()
-    id: number | undefined
+    id: number;
 
     @Column()
-    name: string
+    name: string;
 
     @Column({
         type: "enum",
         enum: MovieType,
     })
-    type: MovieType
+    type: MovieType;
 }

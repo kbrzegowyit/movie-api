@@ -1,5 +1,4 @@
-import { Any } from "typeorm";
-import { MovieController } from "./api/movies/movies.controller";
+import { MovieController } from "./api/movies/movie.controller";
 import { ServicesFactory } from "./services.factory";
 
 export interface Controllers {

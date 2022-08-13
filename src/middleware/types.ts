@@ -4,6 +4,10 @@ export interface Callback {
     (...args: any[]): any,
 };
 
+export interface ParsedParams {
+    [param: string]: number;
+}
+
 export const RES_STATUS = Symbol('response_status');
 export const RES_DATA = Symbol('response_data');
 

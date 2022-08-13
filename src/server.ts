@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import express, {  } from 'express'
 import dotenv from 'dotenv'
 import { DataSource } from 'typeorm'
-import { Movie } from './api/movies/movies.model';
+import { Movie } from './api/movies/movie.model';
 import { MainRouter } from './routers/main.router';
 import { ServicesFactory } from './services.factory';
 import { ControllersFactory } from './controllers.factory';

@@ -8,8 +8,8 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
         (<any>res)[RES_STATUS] = err.code;
         (<any>res)[RES_DATA] = err.message;
     } else {
-        (<any>res)[RES_STATUS] = HttpStatusCode.INTERNAL_SERVER;
-        (<any>res)[RES_DATA] = HttpResponseMessages.INTERNAL_SERVER;
+        (<any>res)[RES_STATUS] = HttpStatusCode.INTERNAL_SERVER_ERROR;
+        (<any>res)[RES_DATA] = HttpResponseMessages.INTERNAL_SERVER_ERROR;
     }
     next();
 }
