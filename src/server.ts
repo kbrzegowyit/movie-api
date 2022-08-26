@@ -8,6 +8,7 @@ import { ServicesFactory } from './services.factory';
 import { ControllersFactory } from './controllers.factory';
 import { errorHandler } from './middleware/errorHandler';
 import { responseHandler } from './middleware/responseHandler';
+import { ROOT } from './routers/route.constants';
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
@@ -34,7 +35,7 @@ const controllersFactory = new ControllersFactory(servicesFactory);
 const mainRouter = new MainRouter(controllersFactory);
 
 server.use(express.json());
-server.use('/', mainRouter.router);
+server.use(ROOT, mainRouter.router);
 server.use(errorHandler);
 server.use(responseHandler);
 

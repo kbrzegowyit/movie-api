@@ -7,6 +7,10 @@ export const MOVIE_ADD_SCHEMA = {
       type: 'string',
       nullable: false,
     },
+    director: {
+      type: 'string',
+      nullable: false,
+    },
     type: {
       enum: Object.values(MovieType),
     },
@@ -19,6 +23,10 @@ export const MOVIE_UPDATE_SCHEMA = {
   type: 'object',
   properties: {
     name: {
+      type: 'string',
+      nullable: false,
+    },
+    director: {
       type: 'string',
       nullable: false,
     },
