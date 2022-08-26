@@ -2,7 +2,7 @@ import { DeleteResult } from 'typeorm';
 import { MovieNotFound } from '../../errors/MovieNotFound';
 import { Movie } from './movie.model';
 import { MovieRepository } from './movie.repository';
-import { MovieData, UpdateMovieData } from './types';
+import { MovieData } from './types';
 
 export class MovieService {
   constructor(private movieRepository: MovieRepository) {}

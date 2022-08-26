@@ -1,4 +1,4 @@
-import { DeleteResult, UpdateResult } from 'typeorm';
+import { DeleteResult } from 'typeorm';
 import { Movie } from './movie.model';
 import { MovieService } from './movie.service';
 import { MovieDataLocals, MovieParamsIdLocals } from './types';

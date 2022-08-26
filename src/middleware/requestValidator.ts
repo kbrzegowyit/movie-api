@@ -47,7 +47,7 @@ const isRequestValid = (requestData: any, scheam: any) => {
 };
 
 const parseParamsIds = (params: any): ParsedParams => {
-  let parsedParams: ParsedParams = {};
+  const parsedParams: ParsedParams = {};
 
   for (const key in params) {
     parsedParams[key] = parseInt(params[key]);

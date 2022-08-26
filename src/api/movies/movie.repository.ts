@@ -1,6 +1,6 @@
 import { DataSource, DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Movie } from './movie.model';
-import { MovieData, UpdateMovieData } from './types';
+import { MovieData } from './types';
 
 export class MovieRepository extends Repository<Movie> {
   constructor(private dataSource: DataSource) {
