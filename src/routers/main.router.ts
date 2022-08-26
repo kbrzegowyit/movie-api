@@ -1,18 +1,18 @@
-import { Router } from "express";
-import { ControllersFactory } from "../controllers.factory";
-import { MoviesRouter } from "./movies.router";
-import { MOVIE_ROUTE_MODIFIERS } from "./route.constants";
+import { Router } from 'express';
+import { ControllersFactory } from '../controllers.factory';
+import { MoviesRouter } from './movies.router';
+import { MOVIE_ROUTE_MODIFIERS } from './route.constants';
 
 export class MainRouter {
-    public readonly router: Router;
+  public readonly router: Router;
 
-    constructor(private controllersFactory: ControllersFactory) {
-        const mainRouter = Router();
+  constructor(private controllersFactory: ControllersFactory) {
+    const mainRouter = Router();
 
-        const movieRouter = new MoviesRouter(controllersFactory.controllers.movieController).router;
+    const movieRouter = new MoviesRouter(controllersFactory.controllers.movieController).router;
 
-        mainRouter.use(MOVIE_ROUTE_MODIFIERS.MOVIES, movieRouter);
+    mainRouter.use(MOVIE_ROUTE_MODIFIERS.MOVIES, movieRouter);
 
-        this.router = mainRouter;
-    }
+    this.router = mainRouter;
+  }
 }

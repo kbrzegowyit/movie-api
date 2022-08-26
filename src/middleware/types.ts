@@ -1,17 +1,17 @@
-import { Response } from "express";
+import { Response } from 'express';
 
 export interface Callback {
-    (...args: any[]): any,
-};
+  (...args: any[]): any;
+}
 
 export interface ParsedParams {
-    [param: string]: number;
+  [param: string]: number;
 }
 
 export const RES_STATUS = Symbol('response_status');
 export const RES_DATA = Symbol('response_data');
 
 export interface ApiResponse extends Response {
-    [RES_STATUS]: number,
-    [RES_DATA]: any;
+  [RES_STATUS]: number;
+  [RES_DATA]: any;
 }

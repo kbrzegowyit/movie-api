@@ -1,21 +1,21 @@
-import { DataSource } from "typeorm";
-import { MovieRepository } from "./api/movies/movie.repository";
-import { MovieService } from "./api/movies/movie.service"
+import { DataSource } from 'typeorm';
+import { MovieRepository } from './api/movies/movie.repository';
+import { MovieService } from './api/movies/movie.service';
 
 export interface Services {
-    movieService: MovieService
+  movieService: MovieService;
 }
 
 export class ServicesFactory {
-    public readonly services: Services;
+  public readonly services: Services;
 
-    constructor(private dataSource: DataSource) {
-        const movieRepository = new MovieRepository(dataSource);
+  constructor(private dataSource: DataSource) {
+    const movieRepository = new MovieRepository(dataSource);
 
-        const movieService = new MovieService(movieRepository);
+    const movieService = new MovieService(movieRepository);
 
-        this.services = {
-            movieService
-        }
-    }
+    this.services = {
+      movieService,
+    };
+  }
 }
