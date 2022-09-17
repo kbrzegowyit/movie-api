@@ -24,7 +24,8 @@ export class MovieService {
   };
 
   public updateMovieById = async (id: number, data: MovieData): Promise<Movie> => {
-    return (await this.movieRepository.updateMovieById(id, data)).raw as Movie;
+    const { raw: [updatedMovie] } = await this.movieRepository.updateMovieById(id, data);
+    return updatedMovie;
   };
 
   public deleteMovieById = async (id: number): Promise<DeleteResult> => {
